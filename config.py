@@ -1,0 +1,4 @@
+#Config file for storing API Keys
+
+API_KEY = "PK57QI7WP9EKVNYA9XJN"
+SEC_KEY = "ow0o1hY2o1cOkKJ50yGd87GEkpBua1YTdBEUjPHo"
