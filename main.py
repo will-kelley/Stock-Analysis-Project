@@ -1,22 +1,29 @@
-from alpaca.data import StockHistoricalDataClient
-from alpaca.data.requests import StockBarsRequest
-from alpaca.data.timeframe import TimeFrame
+import sys
+from stock_analysis import fetch_stock_data, calculate_moving_averages, plot_stock_data
 from datetime import datetime
-import plotly.graph_objects as go
-import pandas as pd
 
-stock_client = StockHistoricalDataClient("PKIMCNYABPKFSLDLQF1W", "SkEf5wljoJAdrvI55IIFL2VIphVpdXjLGXtRE7Pa")
 
-request_parameter = StockBarsRequest(symbol_or_symbols="AMZN",
-                                     timeframe=TimeFrame.Day,
-                                     start=datetime(2023, 1, 1),
-                                     end=datetime(2023, 11, 16))
-bars = stock_client.get_stock_bars(request_parameter).df.reset_index()
+def main():
+    # User input for ticker symbol and date range
+    ticker = input("Enter the ticker symbol: ")
+    start_year, start_month, start_day = map(int, input("Enter start date (YYYY MM DD): ").split())
+    end_year, end_month, end_day = map(int, input("Enter end date (YYYY MM DD): ").split())
 
-fig = go.Figure(data=[go.Candlestick(x=bars["timestamp"],
-                                     open=bars["open"],
-                                     high=bars["high"],
-                                     low=bars["low"],
-                                     close=bars["close"])])
+    # Fetch stock data for the given ticker and date range
+    bars = fetch_stock_data(ticker, datetime(start_year, start_month, start_day),
+                            datetime(end_year, end_month, end_day))
 
-fig.show()
+    # Ask user if they want to include moving averages
+    include_ma = input("Include Moving Averages? (yes/no): ").lower() == 'yes'
+    include_volume = input("Include Volume Bars? (yes/no): ").lower() == 'yes'
+
+    # Calculate moving averages for the stock data if selected
+    if include_ma:
+        bars = calculate_moving_averages(bars)
+
+    # Plot the stock data along with selected features
+    plot_stock_data(bars, ticker, include_ma, include_volume)
+
+
+if __name__ == "__main__":
+    main()
