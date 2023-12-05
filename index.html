@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Analysis Form</title>
+    <style>
+    <!–– Styling assisted by chatgpt ––>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+        }
+        form {
+            width: 300px;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="date"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        #results {
+            width: 90%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Stock Analysis</h1>
+    <form action="/" method="post">
+        <label for="ticker">Ticker Symbol:</label>
+        <input type="text" id="ticker" name="ticker" required><br><br>
+
+        <label for="start_date">Start Date (YYYY-MM-DD):</label>
+        <input type="date" id="start_date" name="start_date" required><br><br>
+
+        <label for="end_date">End Date (YYYY-MM-DD):</label>
+        <input type="date" id="end_date" name="end_date" required><br><br>
+
+        <input type="checkbox" id="include_ma" name="include_ma">
+        <label for="include_ma">Include Moving Averages</label><br><br>
+
+        <input type="checkbox" id="include_volume" name="include_volume">
+        <label for="include_volume">Include Volume Bars</label><br><br>
+
+        <input type="submit" value="Analyze">
+    </form>
+
+    <!-- Section to display results -->
+    {% if plot_html %}
+        <div id="results">{{ plot_html|safe }}</div>
+    {% endif %}
+</body>
+</html>
+
