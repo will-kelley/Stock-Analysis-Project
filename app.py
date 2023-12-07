@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request
-from stock_analysis import fetch_stock_data, calculate_moving_averages, plot_stock_data
+from stock_analysis import (fetch_stock_data, calculate_moving_averages,
+                            plot_stock_data, fit_trendlines_single, fit_trendlines_high_low)
 from datetime import datetime
+import numpy as np
 
 app = Flask(__name__)
 
@@ -25,8 +27,12 @@ def index():
         if include_ma:
             bars = calculate_moving_averages(bars)
 
+        # Fit trend lines to the stock data
+        support_coefs, resist_coefs = fit_trendlines_single(bars['close'].to_numpy())
+        trend_lines = {'support': support_coefs, 'resistance': resist_coefs}
+
         # Generate plot and store its HTML in plot_html
-        plot_html = plot_stock_data(bars, ticker, include_ma, include_volume)
+        plot_html = plot_stock_data(bars, ticker, include_ma, include_volume, trend_lines)
 
     # Pass plot_html to the template, which will be None if no POST request is made
     return render_template('index.html', plot_html=plot_html)
@@ -34,3 +40,4 @@ def index():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
