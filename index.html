@@ -3,7 +3,7 @@
 <head>
     <title>Stock Analysis Form</title>
     <style>
-    <!–– Styling assisted by chatgpt ––>
+        <!–– Styling assisted by chatgpt ––>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -66,6 +66,10 @@
         <input type="checkbox" id="include_volume" name="include_volume">
         <label for="include_volume">Include Volume Bars</label><br><br>
 
+        <!-- New checkbox for including trend line analysis -->
+        <input type="checkbox" id="include_trend_lines" name="include_trend_lines">
+        <label for="include_trend_lines">Include Trend Line Analysis</label><br><br>
+
         <input type="submit" value="Analyze">
     </form>
 
@@ -75,4 +79,3 @@
     {% endif %}
 </body>
 </html>
-
