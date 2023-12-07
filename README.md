@@ -5,4 +5,5 @@ This project is designed to provide detailed stock analysis for any given ticker
 
 **Features:**  
 <u>-Simple Moving Averages:</u> The simple moving average (SMA) is a tool that smoothes out short-term fluctuations in a stocks price and highlights a longer-term trend in the data. I have included 20, 50, and 100-day options.  
-<u>-Volume Bars:</u> What Volume Represents: Volume bars represent the amount of stock traded during a certain period, in this case, over a day timeframe. The amount of volume is displayed visually as verticle bars and if hovered over, they also display a value. 
+<u>-Volume Bars:</u> What Volume Represents: Volume bars represent the amount of stock traded during a certain period, in this case, over a day timeframe. The amount of volume is displayed visually as verticle bars and if hovered over, they also display a value.  
+-Support and Resistance Lines: Support and resistance lines in stock analysis are trend lines indicating where the price of a stock tends to stop and reverse, with support being the level below which the price rarely falls and resistance being the level above which the price doesn't usually rise
