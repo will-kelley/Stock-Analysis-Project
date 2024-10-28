@@ -1,4 +1,0 @@
-#Config file for storing API Keys
-
-API_KEY = "INSERT PERSONAL API KEY"
-SEC_KEY = "INSERT PERSONAL SEC KEY"
